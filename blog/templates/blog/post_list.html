@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .header-btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-btn:hover {
+            background-color: #218838;
+        }
+
+        ul.post-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        li.post-item {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        li.post-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .post-title {
+            font-size: 1.5em;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .post-title:hover {
+            text-decoration: underline;
+        }
+
+        .post-actions {
+            margin-top: 10px;
+        }
+
+        .post-edit,
+        .post-delete {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .post-edit:hover,
+        .post-delete:hover {
+            text-decoration: underline;
+        }
+
+        .post-delete {
+            color: #dc3545;
+        }
+
+        .post-delete:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Posts</h1>
+    </header>
+    <div class="container">
+        <a href="{% url 'post_create' %}" class="header-btn">Create New Post</a>
+        <ul class="post-list">
+            {% for post in posts %}
+                <li class="post-item">
+                    <a href="{% url 'post_detail' post.pk %}" class="post-title">{{ post.title }}</a>
+                    <div class="post-actions">
+                        <a href="{% url 'post_update' post.pk %}" class="post-edit">Edit</a>
+                        <a href="{% url 'post_delete' post.pk %}" class="post-delete">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
